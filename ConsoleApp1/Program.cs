@@ -17,6 +17,7 @@ namespace ConsoleApp1
     }
     interface IMagicSpell {        
         String SpellName { get; set; }
+        int Level { get; set; }
         void CastSpell();
     }
 
@@ -34,7 +35,8 @@ namespace ConsoleApp1
         public string Name { get; set; }
         public int GoldValue { get; set; }
         public string SpellName { get; set; }
-        
+        public int Level { get; set; }
+
         public void CastSpell()
         {
             Console.WriteLine($"Spell casted {SpellName}");
