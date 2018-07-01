@@ -22,6 +22,15 @@ namespace ConsoleApp1
 
     class Weapon : IItem, IMagicSpell
     {
+        private Random rnd = new Random();
+        private int weaponId;
+        public int WeaponID
+        {
+            get { return weaponId; }
+            private set { weaponId = rnd.Next(0, 10000); }
+        }
+        
+
         public string Name { get; set; }
         public int GoldValue { get; set; }
         public string SpellName { get; set; }
@@ -48,9 +57,9 @@ namespace ConsoleApp1
 
         public Weapon()
         {
-
+            this.WeaponID = 0;
         }
-        public Weapon(Func<object, bool> func)
+        public Weapon(Func<object, bool> func) : this()
         {
             Swing = func;
         }
@@ -75,9 +84,11 @@ namespace ConsoleApp1
                 Console.WriteLine($"I guess someone swing this weapon { (o as Weapon).Name }");
                 return true;
             });
+            
+            
             myweapon.Name = "Sledgehammer";
 
-
+            Console.WriteLine($"My WeaponID: {myweapon.WeaponID}");
 
             weapons.Where(w => w.Name == "Hammer").FirstOrDefault().ThrowAway();
             weapons.Where(w => w.Name == "Axe").FirstOrDefault().CastSpell();
