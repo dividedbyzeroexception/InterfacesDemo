@@ -8,11 +8,12 @@ using Newtonsoft.Json;
 namespace ConsoleApp1
 {
     interface IItem {
-            string Name { get; set; }
-            int GoldValue { get; set; }
+        string Name { get; set; }
+        int GoldValue { get; set; }
 
-            void Equip();
-            void Sell();
+        void Equip();
+        void Sell();
+        void ThrowAway();
     }
 
     class Weapon : IItem
@@ -28,6 +29,11 @@ namespace ConsoleApp1
         public void Sell()
         {
             Console.WriteLine("Sold");
+        }
+
+        public void ThrowAway()
+        {
+            Console.WriteLine($"Threw away my { Name }");
         }
     }
 
@@ -45,7 +51,7 @@ namespace ConsoleApp1
             weapons.Add(new Weapon { Name = "Hammer", GoldValue = 30 });
             weapons.Add(new Weapon { Name = "Spear", GoldValue = 50 });
 
-
+            weapons.Where(w => w.Name == "Hammer").FirstOrDefault().ThrowAway();
 
             string strJson = JsonConvert.SerializeObject(weapons);
             Console.ReadLine();
